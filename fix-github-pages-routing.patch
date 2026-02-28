@@ -1,0 +1,58 @@
+From: Copilot <223556219+Copilot@users.noreply.github.com>
+Subject: [PATCH] Fix GitHub Pages initial render - add basename and base path
+
+BrowserRouter was missing the basename prop, so on initial load at
+/swetha-dental/ the router couldn't match routes. Also added 404.html
+for SPA fallback on direct URL visits.
+
+---
+ public/404.html |  13 +++++++++++++
+ src/main.jsx    |   2 +-
+ vite.config.js  |   3 ++-
+ 3 files changed, 16 insertions(+), 2 deletions(-)
+ create mode 100644 public/404.html
+
+diff --git a/vite.config.js b/vite.config.js
+--- a/vite.config.js
++++ b/vite.config.js
+@@ -3,5 +3,6 @@ import react from '@vitejs/plugin-react'
+ 
+ // https://vite.dev/config/
+ export default defineConfig({
+   plugins: [react()],
++  base: '/swetha-dental/',
+ })
+
+diff --git a/src/main.jsx b/src/main.jsx
+--- a/src/main.jsx
++++ b/src/main.jsx
+@@ -8,7 +8,7 @@ import './styles/global.css';
+ ReactDOM.createRoot(document.getElementById('root')).render(
+   <React.StrictMode>
+     <LanguageProvider>
+-      <BrowserRouter>
++      <BrowserRouter basename="/swetha-dental">
+         <App />
+       </BrowserRouter>
+     </LanguageProvider>
+
+diff --git a/public/404.html b/public/404.html
+new file mode 100644
+--- /dev/null
++++ b/public/404.html
+@@ -0,0 +1,13 @@
++<!doctype html>
++<html lang="en">
++  <head>
++    <meta charset="UTF-8" />
++    <link rel="icon" type="image/svg+xml" href="/swetha-dental/vite.svg" />
++    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++    <title>Swetha Multi-Speciality Dental Hospital</title>
++    <meta name="description" content="Swetha Multi-Speciality Dental Hospital – Advanced dental care in Karimnagar with 17+ years of trusted experience." />
++  </head>
++  <body>
++    <div id="root"></div>
++    <script type="module" src="/swetha-dental/src/main.jsx"></script>
++  </body>
++</html>
+--
