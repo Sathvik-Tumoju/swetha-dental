@@ -1,0 +1,33 @@
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.4rem 0.75rem;
+  background: rgba(10, 126, 140, 0.08);
+  border: 1.5px solid rgba(10, 126, 140, 0.2);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-family: var(--font-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  color: var(--dark-gray);
+}
+
+.lang-toggle:hover {
+  background: rgba(10, 126, 140, 0.12);
+  border-color: var(--primary);
+}
+
+.lang-toggle__option {
+  transition: color var(--transition-fast);
+}
+
+.lang-toggle__option--active {
+  color: var(--primary);
+}
+
+.lang-toggle__divider {
+  color: var(--gray);
+  font-weight: 400;
+}
